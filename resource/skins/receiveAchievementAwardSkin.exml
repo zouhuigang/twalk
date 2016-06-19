@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="receiveAchievementAwardSkin" width="640" height="400" currentState="up" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="down,up" >
+	<e:Group id="ID_group" horizontalCenter="0">
+		<e:Image source="querstionbg_png" y="-2" width="400" height="400" horizontalCenter="0"/>
+		<e:Label id="ID_receiveAchievementAward_title" text="恭喜您获得如下奖励" y="24" textColor="0xD02727" verticalAlign="middle" horizontalCenter="0"/>
+		<e:Image id="ID_receiveAchievementAward_images" source="finished_png" y="66" width="400" height="200" horizontalCenter="0"/>
+		<e:Label id="ID_receiveAchievementAward_label" text="积分：0分，能量0点，金币0枚" x="8" y="274" width="385" height="51" textColor="0x667309" verticalAlign="middle" textAlign="center" size="25"/>
+	</e:Group>
+</e:Skin>

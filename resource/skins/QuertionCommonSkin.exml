@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="QuertionCommonSkin" width="640" height="400" currentState="up" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="down,up" >
+	<e:Group id="ID_group" horizontalCenter="0">
+	<e:Image source="querstionbg_png" y="-2" width="400" height="400" horizontalCenter="0"/>
+	<e:Image id="ID_quertionclose_png" source="close_png" x="352" y="23" width="26" height="26"/>
+	<e:Label id="ID_CityName" text="开始答题" y="26" textColor="0xD02727" verticalAlign="middle" horizontalCenter="0"/>
+	<e:Image id="ID_QuertionCommonIcon" source="question_png" y="66" width="400" height="200" horizontalCenter="0"/>
+	<e:Button id="ID_Buttons" label="{data.buttons}"  y="300" width="204" height="48"  enabled="true" enabled.down="false" horizontalCenter.down="0" horizontalCenter="0" skinName="ZhgButtonSkin">
+	</e:Button>
+	</e:Group>
+</e:Skin>
