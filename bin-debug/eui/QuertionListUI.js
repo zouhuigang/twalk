@@ -7,6 +7,8 @@ var QuertionListUI = (function (_super) {
         this._nextuncolckevent = 0; //下一个事件
         //遇到问题
         this.lineHeight = 0;
+        this.answer_total = 0; //该题答案区的总长度
+        this.anser_every_height = []; //错与对出现的位置，答案的中间位置
         //选中答案
         this.zi_eventid = 0;
         this.eventid = eventid;
@@ -27,14 +29,24 @@ var QuertionListUI = (function (_super) {
         this.list.dataProvider = myCollection;
         this.list.percentWidth = 100;
         this.list.percentHeight = 100;
-        this.list.y = 245 + this.ID_QuertionDesc.textHeight + 20;
-        var exml = "\n       <e:Skin xmlns:e=\"http://ns.egret.com/eui\">\n       <e:Group  width=\"640\" x=\"0\" height=\"{data.border_h}\">\n            <e:Image source=\"linec_png\" left=\"0\" horizontalCenter=\"0\"  scale9Grid=\"13,23,100,20\"   width=\"{data.border_w}\" height=\"{data.border_h}\"/> \n\t\t\t<e:Label text=\"{data.f_select}\"  size=\"18\" width=\"380\"  multiline=\"true\" lineSpacing=\"5\" verticalAlign=\"middle\" horizontalCenter=\"0\"  textAlign=\"center\" textColor=\"0x425260\" left=\"200\" right=\"200\" top=\"0\" bottom=\"0\"/> \n\t\t</e:Group>\n\t\t</e:Skin>\n        \n        ";
+        this.list.y = 330 + this.ID_QuertionDesc.textHeight + 80;
+        var exml = "\n       <e:Skin xmlns:e=\"http://ns.egret.com/eui\">\n       <e:Group  width=\"640\" x=\"0\" height=\"{data.border_h}\">\n            <e:Image source=\"linec_png\" left=\"0\" horizontalCenter=\"0\"  scale9Grid=\"13,23,100,20\"   width=\"{data.border_w}\" height=\"{data.border_h}\"/> \n\t\t\t<e:Label text=\"{data.f_select}\"  size=\"30\" width=\"400\"  multiline=\"true\" lineSpacing=\"5\" verticalAlign=\"middle\" horizontalCenter=\"0\"  textAlign=\"center\" textColor=\"0x425260\" left=\"120\" right=\"120\" top=\"0\" bottom=\"0\"/> \n\t\t</e:Group>\n\t\t</e:Skin>\n        \n        ";
         //this.list.itemRenderer = AnswerList;
         this.list.itemRendererSkinName = exml;
         this.addChild(this.list);
         this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.SelectAnswer, this);
         //控制背景大小
-        this.ID_Querstionbg.height = 201 + this.list.y - 30;
+        //this.ID_Querstionbg.height = 330 + this.list.y;
+        this.ID_Querstionbg.height = this.answer_total + this.list.y; //问题描述区+答案区
+        //        var _right: egret.Bitmap = new egret.Bitmap(RES.getRes("correct_png"));
+        //        _right.x = 530;
+        //        _right.y = this.anser_every_height[0]-15;
+        //        this.list.addChild(_right);
+        //        var _rights: egret.Bitmap = new egret.Bitmap(RES.getRes("correct_png"));
+        //        _rights.x = 530;
+        //        _rights.y = this.anser_every_height[1]-15;
+        //        this.list.addChild(_rights);
+        //        console.dir(_right.y);
     };
     p.getevent = function () {
         var _this = this;
@@ -50,7 +62,7 @@ var QuertionListUI = (function (_super) {
             _this.ID_icon.source = _this._Netdata.data['zhu_event']['f_icon'];
             var len = _this._Netdata.data['zi_event'].length;
             //求答案字符串的最大值
-            var answ_max_len_w = 276;
+            var answ_max_len_w = 400;
             //            for(var i: number = 0;i < len;i++) {
             //                var mystringlength: number = this._Netdata.data['zi_event'][i]['f_select'].length;//一个中文字一个长度
             //                var border_w = mystringlength * 24 + 60;
@@ -62,13 +74,16 @@ var QuertionListUI = (function (_super) {
             //                }
             //                
             //            }
-            console.log(answ_max_len_w);
+            _this.answer_total = 0; //初始化
             for (var i = 0; i < len; i++) {
                 //给数据中添加一个含有"label"属性的对象
                 var mystringlength = _this._Netdata.data['zi_event'][i]['f_select'].length; //一个中文字一个长度
-                var border_h = Math.ceil(mystringlength / 13) * 22 + 33;
+                var border_h = Math.ceil(mystringlength / 13) * 40 + 33;
                 _this.lineHeight = Math.ceil(mystringlength / 13);
-                console.log(border_h);
+                _this.answer_total += border_h;
+                //存入数组
+                var answer_mid = _this.answer_total - border_h / 2;
+                _this.anser_every_height.push(answer_mid);
                 _this.sourceArr.push({
                     id: parseInt(_this._Netdata.data['zi_event'][i]['id']),
                     f_select: _this._Netdata.data['zi_event'][i]['f_select'],
@@ -77,6 +92,9 @@ var QuertionListUI = (function (_super) {
                     border_h: border_h
                 });
             }
+            _this.answer_total = _this.answer_total + 50; //加上边框之间的距离
+            //console.log('答案的总长度'+this.answer_total);
+            //console.log('所有答案的长度'+this.anser_every_height);
             _this.uiCompHandler();
         }, this);
     };
@@ -102,8 +120,9 @@ var QuertionListUI = (function (_super) {
             _this.RewardInfo = _this._Netdata.data['rewrdInfo'];
             if (_this.list.selectedItem.f_istrue) {
                 _this._right = new egret.Bitmap(RES.getRes("correct_png"));
-                _this._right.x = 460;
-                _this._right.y = _this.list.selectedIndex * 50 + 15 + (_this.lineHeight - 1) * 30 - 15;
+                _this._right.x = 530;
+                //this._right.y = this.list.selectedIndex * 50 + 15 + (this.lineHeight-1)*30-15;
+                _this._right.y = _this.anser_every_height[_this.list.selectedIndex] - 15;
                 _this.list.addChild(_this._right);
                 //console.log(this.list.dataProvider.getItemAt(this.list.selectedIndex).f_select);
                 _this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, _this.SelectAnswer, _this);
@@ -111,8 +130,9 @@ var QuertionListUI = (function (_super) {
             }
             else {
                 _this._wrong = new egret.Bitmap(RES.getRes("wrong_png"));
-                _this._wrong.x = 460;
-                _this._wrong.y = _this.list.selectedIndex * 50 + 15 + (_this.lineHeight - 1) * 30;
+                _this._wrong.x = 530;
+                //this._wrong.y = this.list.selectedIndex * 50 + 15+ (this.lineHeight - 1) * 30;
+                _this._wrong.y = _this.anser_every_height[_this.list.selectedIndex] - 15;
                 _this.list.addChild(_this._wrong);
                 _this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, _this.SelectAnswer, _this);
                 _this.PassOrNextEvent();

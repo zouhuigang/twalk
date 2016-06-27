@@ -45,10 +45,10 @@ module xss {
 
     private getResComplete(data: any): void {
         this.headImg = new egret.Bitmap(data);
-        this.headImg.width = 35;
-        this.headImg.height = 35;
-        this.headImg.x = this.view.x+26;
-        this.headImg.y = this.view.y+26;
+        this.headImg.width = 66;//35
+        this.headImg.height = 66;
+        this.headImg.x = this.view.x+52;//26
+        this.headImg.y = this.view.y + 52;
         this.headImg.anchorOffsetX = this.headImg.width / 2;
         this.headImg.anchorOffsetY = this.headImg.height / 2;
         this.viewC.addChild(this.headImg);
@@ -230,7 +230,7 @@ module xss {
         this._QUERTIONCONT.alpha = 0;
         
          //缓动，，从-400旋转40
-        TweenMax.fromTo(this._QUERTIONCONT,0.5,{ y: 0,scaleX: 0.1,alpha: 0.1,rotation: 90 },{ alpha:1,delay: 0.8,y: (egret.MainContext.instance.stage.stageHeight - 400) / 2,scaleX: 1,rotation: 0,ease: Circ.easeOut });
+        TweenMax.fromTo(this._QUERTIONCONT,0.5,{ y: 0,scaleX: 0.1,alpha: 0.1,rotation: 90 },{ alpha:1,delay: 0.8,y: (egret.MainContext.instance.stage.stageHeight - 700) / 2,scaleX: 1,rotation: 0,ease: Circ.easeOut });
         //监听
         this._QuertionCommonUI.addEventListener(QuertionListEvent.EVT_CLOSE,() => {
             this.quertioncloseHandle();

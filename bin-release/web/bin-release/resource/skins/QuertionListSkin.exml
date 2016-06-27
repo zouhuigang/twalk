@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="QuertionListSkin" width="640" height="517" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="ID_Querstionbg" source="querstionbg_png" y="-2" width="400" height="517" horizontalCenter="0"/>
-	<e:Image id="ID_icon" source="question_png" y="43" width="400"  height="200" horizontalCenter="0"/>
-	<e:Group height="258" width="400" y="245" horizontalCenter="0">
-		<e:Label id="ID_QuertionDesc" text="正在加载中.." textColor="0x000000" size="20" verticalAlign="middle" top="5" width="380" textAlign="left" lineSpacing="10" horizontalCenter="-4" />
+<e:Skin class="QuertionListSkin" width="640" height="700" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="ID_Querstionbg" source="querstionbg_png" y="-2" width="560" height="700" horizontalCenter="0"/>
+	<e:Image id="ID_icon" source="question_png" y="54" width="560"  height="300" horizontalCenter="0"/>
+	<e:Group height="309" width="554" y="368" horizontalCenter="0">
+		<e:Label id="ID_QuertionDesc" text="正在加载中.." textColor="0x000000" size="30" verticalAlign="middle" top="14" width="514" textAlign="left" lineSpacing="10" horizontalCenter="8" />
 		
 	</e:Group>
 	
-	<e:Label id="ID_CityName" text="d" y="10" textColor="0xD02727" horizontalCenter="0" size="24"/>
+	<e:Label id="ID_CityName" text="d" y="10" textColor="0xD02727" horizontalCenter="0" size="40"/>
 	
 </e:Skin>

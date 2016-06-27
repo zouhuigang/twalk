@@ -82,8 +82,8 @@ var xss;
             //分享
             this.share = new egret.Bitmap(RES.getRes("share_png"));
             this.share.touchEnabled = true;
-            this.share.scaleX = 0.8;
-            this.share.scaleY = 0.8;
+            this.share.scaleX = 1;
+            this.share.scaleY = 1;
             this.share.x = 5;
             this.share.y = 105;
             this.share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.shareF, this);
@@ -94,8 +94,8 @@ var xss;
             this.backToApp = new egret.Bitmap(RES.getRes("back_png"));
             this.backToApp.touchEnabled = true;
             this.backToApp.addEventListener(egret.TouchEvent.TOUCH_TAP, this.backToAppF, this);
-            this.backToApp.scaleX = 0.8;
-            this.backToApp.scaleY = 0.8;
+            this.backToApp.scaleX = 1;
+            this.backToApp.scaleY = 1;
             this.backToApp.x = 5;
             this.backToApp.y = 5;
             this.addChild(this.backToApp);
@@ -118,8 +118,8 @@ var xss;
             this._energy.setBarProgress(this.now_energy, this.most_energy);
             //小人
             this.bottomBtn = new egret.Bitmap(RES.getRes("power3_png"));
-            this.bottomBtn.x = this.stageW - 210;
-            this.bottomBtn.y = this.stageH - 100;
+            this.bottomBtn.x = this.stageW - 140;
+            this.bottomBtn.y = this.stageH - 94;
             this.bottomBtn.alpha = 0;
             this.addChild(this.bottomBtn);
             this.bottomBtn.anchorOffsetX = this.bottomBtn.width / 2;
@@ -129,9 +129,9 @@ var xss;
             TweenMax.to(this.bottomBtn, 0.3, { alpha: 1, ease: Sine.easeInOut, delay: 0.1,
                 onComplete: function () {
                     if (that._isfirst) {
-                        var xx = 430;
-                        var yy = that.stageH - 100;
-                        var rad = 25;
+                        var xx = that.bottomBtn.x;
+                        var yy = that.bottomBtn.y;
+                        var rad = that.bottomBtn.width / 2;
                         that._Hollowed = new HollowedOutLayer(xx, yy, rad, 0.8);
                         that.addChild(that._Hollowed);
                     }
@@ -356,7 +356,7 @@ var xss;
                     this._Hollowed.parent.removeChild(this._Hollowed);
                 }
             }
-            console.log("进入了myselfmove");
+            // console.log("进入了myselfmove");
             //分发能量
             this.now_energy = parseInt(StorageSetting.getItem('now_energy'));
             if (this.now_energy > 0) {
@@ -382,7 +382,7 @@ var xss;
             this.bottomBtn.touchEnabled = b;
         };
         p.go = function () {
-            console.log("走起来...");
+            // console.log("走起来...");
             this.bottomBtn.touchEnabled = false;
             this._go_tip_con = new egret.Sprite();
             this._go_tip_con.graphics.beginFill(0x000000, 0.7);

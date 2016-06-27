@@ -2,7 +2,7 @@
 <e:Skin class="zhgOrangeButtonSkin" states="up,down" height="40" width="120" xmlns:e="http://ns.egret.com/eui" >
 	<e:Image id="baseImage" source="button_orange_up_png" width.up="100%" height.up="100%" horizontalCenter="0" verticalCenter="0"
 	         width.down="96%" height.down="96%" />
-	<e:Label id="labelDisplay" size.up="14" verticalCenter="0" textAlign="center" textColor.up="0xffffff"
-	         horizontalCenter="0" size.down="13" textColor.down="0xffffff" fontFamily="微软雅黑" size="14" width="100" 
-	         height="14"/>
+	<e:Label id="labelDisplay" size.up="30" verticalCenter="0" textAlign="center" textColor.up="0xffffff"
+	         horizontalCenter="0" size.down="30" textColor.down="0xffffff" fontFamily="微软雅黑" size="30" width="100" 
+	         height="30"/>
 </e:Skin>

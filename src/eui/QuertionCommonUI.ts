@@ -25,8 +25,8 @@ class QuertionCommonUI extends eui.Component{
         this.ID_quertionclose_png.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onclick_close,this);
         //this.ID_Buttons["baseImage"].source = RES.getRes("start-btn_png");
         this.ID_Buttons['baseImage'].source = RES.getRes("start-btn_png");
-        this.ID_Buttons['baseImage'].width=200;
-        this.ID_Buttons['baseImage'].height=50;
+        this.ID_Buttons['baseImage'].width=200*1.5;
+        this.ID_Buttons['baseImage'].height=50*1.5;
         this.ID_Buttons.touchEnabled=true;
         this.ID_Buttons.addEventListener(egret.TouchEvent.TOUCH_TAP,this.StartAnswerAlert,this);
     }
