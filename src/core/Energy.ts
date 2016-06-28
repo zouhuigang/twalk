@@ -60,14 +60,50 @@ class Energy extends egret.Sprite {
         this.createView(current,total);
     }
     
-    /*移除能量条*/
-    public removeProgress(current,total){
+      /*移除能量条*/
+    public removeProgress(current,total) {
         this.removeChild(this.textField);
         this.maskRect = new egret.Rectangle(0,0,(current / total) * 480,69);//计算遮罩的大小
         this.bartop.mask = this.maskRect;
         //说明文字
         this.createView(current,total);
     }
+    
+    
+    /*动画版==移除能量条*/
+    private time: number = 0;
+    private _current:number=0;
+    private _current_p: number = 0;//缓动过程
+    private _t:number=10;//多少秒移动完成
+    private _difference_value:number=0;
+    private _total: number = 0;
+    public removeProgress_back(km,current,total){
+        this._total = total;
+        this._current=current;
+        this._current_p = km;
+        this._difference_value=km-current;
+        //计时开始,定时器
+        this.time = egret.getTimer();
+        egret.startTick(this.onEnterFrame,this);
+    }
+    
+    private onEnterFrame(advancedTime: number):boolean{
+        
+        this._current_p = this._current_p - Math.ceil(this._difference_value / this._t);
+        //console.log('正在执行缓动' + this._current_p);
+        if(this._current_p <= this._current){
+            egret.stopTick(this.onEnterFrame,this);
+            this.dispatchEventWith(MyselfEvent.ENERGY_MOVE_COMPLETE);
+            this.removeProgress(this._current,this._total);
+        }else{
+            this.removeProgress(this._current_p,this._total);
+        }
+        
+        
+        return false;     
+    }
+    
+    
     
     private textField: egret.TextField;
     private createView(current,total) {

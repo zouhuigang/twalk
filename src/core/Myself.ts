@@ -23,11 +23,11 @@ module xss {
         this.view = new egret.Bitmap(RES.getRes("point_png"));//118*178
         this.viewC.addChild(this.view);
         //缩放
-        //this.view.scaleX = 0.5;
-       // this.view.scaleY = 0.5;
+        this.view.scaleX = 0.7;
+        this.view.scaleY = 0.7;
          //设置描点
-        this.viewC.anchorOffsetX = this.view.width/2;
-        this.viewC.anchorOffsetY = this.view.height;
+        this.viewC.anchorOffsetX = this.view.width / 2 * this.view.scaleX;
+        this.viewC.anchorOffsetY = this.view.height * this.view.scaleY;
        
         this.viewC.x = x;
         this.viewC.y = y;
@@ -45,10 +45,10 @@ module xss {
 
     private getResComplete(data: any): void {
         this.headImg = new egret.Bitmap(data);
-        this.headImg.width = 66;//35
-        this.headImg.height = 66;
-        this.headImg.x = this.view.x+52;//26
-        this.headImg.y = this.view.y + 52;
+        this.headImg.width = 46;//35 66
+        this.headImg.height = 46;
+        this.headImg.x = this.view.x+36;//26 52
+        this.headImg.y = this.view.y + 36;
         this.headImg.anchorOffsetX = this.headImg.width / 2;
         this.headImg.anchorOffsetY = this.headImg.height / 2;
         this.viewC.addChild(this.headImg);
@@ -136,7 +136,11 @@ module xss {
             this.shouldkm =parseInt(this._Netdata.data['consumkm']);
             this.movepx = parseInt(this._Netdata.data['movepx']);
             this.service_now_energy = parseInt(this._Netdata.data['now_energy']);
-            obj.removeProgress(this.service_now_energy,most_km);
+           // obj.removeProgress(this.service_now_energy,most_km);
+            
+            obj.removeProgress_back(km,this.service_now_energy,most_km);
+           
+            
             egret.localStorage.setItem("now_energy",this.service_now_energy.toString());
             //弹框
             this.unlockevent = parseInt(this._Netdata.data['unlockevent']);
@@ -144,28 +148,34 @@ module xss {
             this.CityEventId = parseInt(this._Netdata.data['CityEventId']);//领取奖励
             this._ID_CityName_text_o = this._Netdata.data['f_arrive_city_name'];
             //console.dir(this._Netdata);
+            //监听动画完成事件
+            obj.addEventListener(MyselfEvent.ENERGY_MOVE_COMPLETE,() => {//如不要，则去掉
                 //初始化自己的路径
-            if(this.shouldkm>0){
-                //计算终点坐标
-                var Myliner: MyLinear = new MyLinear();
-                this.roadArr2 = Myliner.getEndXY(this.roadArr1,this.movepx,true);//终点坐标
-                this.myselfmoveInit(this.roadArr2);
-                this.moveStart();//移动开始
-                //监听到达事件
-                this.addEventListener(MyselfEvent.Arrived,this.StopTimer,this);
-                }
-            
-            if(this.unlockCity){
-               this.DounlockCity(); 
+                if(this.shouldkm > 0) {
+                    //计算终点坐标
+                    var Myliner: MyLinear = new MyLinear();
+                    this.roadArr2 = Myliner.getEndXY(this.roadArr1,this.movepx,true);//终点坐标
+                    this.myselfmoveInit(this.roadArr2);
+                    this.moveStart();//移动开始
+                    //监听到达事件
+                    this.addEventListener(MyselfEvent.Arrived,this.StopTimer,this);
+                }//end
+            },this);
+         
+
+            if(this.unlockCity) {
+                this.DounlockCity();
             }
-            if(this.unlockevent && this.shouldkm==0) {//处理弹框问题
+            if(this.unlockevent && this.shouldkm == 0) {//处理弹框问题
                 this.dispatchEventWith(QuertionListEvent.EVT_OPEN_ALERT);
                 this.Dounlockevent();
             }
+           
             
             
         },this);
     }
+
       
     //时间
     private time: number = 0;

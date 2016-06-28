@@ -10,6 +10,13 @@ var Energy = (function (_super) {
         _super.call(this);
         this.stageWidth = egret.MainContext.instance.stage.stageWidth;
         this.stageHeight = egret.MainContext.instance.stage.stageHeight;
+        /*动画版==移除能量条*/
+        this.time = 0;
+        this._current = 0;
+        this._current_p = 0; //缓动过程
+        this._t = 10; //多少秒移动完成
+        this._difference_value = 0;
+        this._total = 0;
         this.energyBar();
     }
     var d = __define,c=Energy,p=c.prototype;
@@ -52,6 +59,28 @@ var Energy = (function (_super) {
         this.bartop.mask = this.maskRect;
         //说明文字
         this.createView(current, total);
+    };
+    p.removeProgress_back = function (km, current, total) {
+        this._total = total;
+        this._current = current;
+        this._current_p = km;
+        this._difference_value = km - current;
+        //计时开始,定时器
+        this.time = egret.getTimer();
+        egret.startTick(this.onEnterFrame, this);
+    };
+    p.onEnterFrame = function (advancedTime) {
+        this._current_p = this._current_p - Math.ceil(this._difference_value / this._t);
+        //console.log('正在执行缓动' + this._current_p);
+        if (this._current_p <= this._current) {
+            egret.stopTick(this.onEnterFrame, this);
+            this.dispatchEventWith(MyselfEvent.ENERGY_MOVE_COMPLETE);
+            this.removeProgress(this._current, this._total);
+        }
+        else {
+            this.removeProgress(this._current_p, this._total);
+        }
+        return false;
     };
     p.createView = function (current, total) {
         this.textField = new egret.TextField();

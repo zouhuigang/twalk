@@ -21,6 +21,7 @@ var MyselfEvent = (function (_super) {
     );
     MyselfEvent.HIDETOOL = "hidetool";
     MyselfEvent.Arrived = "arrived"; //points到达指定点事件
+    MyselfEvent.ENERGY_MOVE_COMPLETE = "ENERGY_MOVE_COMPLETE"; //能量条动画移动完成事件
     return MyselfEvent;
 })(egret.Event);
 egret.registerClass(MyselfEvent,'MyselfEvent');
