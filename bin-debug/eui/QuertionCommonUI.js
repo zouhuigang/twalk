@@ -147,7 +147,8 @@ var QuertionCommonUI = (function (_super) {
             return this._ID_CityName_text;
         }
         ,function (value) {
-            this._ID_CityName_text = value + '人民欢迎您';
+            //this._ID_CityName_text = value+'人民欢迎您';
+            this._ID_CityName_text = value;
             this.ID_CityName.text = this._ID_CityName_text;
             //console.log(this._ID_CityName_text);
         }

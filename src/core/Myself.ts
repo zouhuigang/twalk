@@ -313,7 +313,7 @@ module xss {
     
     //关闭奖励框
     private closefinished(){
-        console.log("关闭问题");
+       // console.log("关闭问题");
         var that = this;
         TweenMax.to(this.ReceveAchievementAwardUI,0.3,{
             scaleX: 0.1,scaleY: 0.1,ease: Back.easeIn,onComplete: function() {

@@ -33,18 +33,18 @@ class ReceveAchievementAwardUI extends eui.Component{
         this.share_b.x=332;//322
         this.share_b.y = 450;
         this.addChild(this.share_b);
-        this.share_b.scaleX = 0.4;
-        this.share_b.scaleY = 0.4;
+        this.share_b.scaleX = 0.3;
+        this.share_b.scaleY = 0.3;
         this.share_b.touchEnabled = true;
         this.share_b.addEventListener(egret.TouchEvent.TOUCH_TAP,this.shareWind,this);
         
         //我知道了
         this.Ikonw_b = Utils.createBitmapByName("iknow-btn_png");
-        this.Ikonw_b.x = 80;//138
+        this.Ikonw_b.x = 140;//138
         this.Ikonw_b.y = 450;
         this.addChild(this.Ikonw_b);
-        this.Ikonw_b.scaleX = 0.4;
-        this.Ikonw_b.scaleY = 0.4;
+        this.Ikonw_b.scaleX = 0.3;
+        this.Ikonw_b.scaleY = 0.3;
         
         this.Ikonw_b.touchEnabled = true;
         this.Ikonw_b.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onclick_close,this);

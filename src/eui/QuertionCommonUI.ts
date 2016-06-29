@@ -174,7 +174,8 @@ class QuertionCommonUI extends eui.Component{
     private _ID_CityName_text:string='';
     public set ID_CityName_text(value: string) {
         
-        this._ID_CityName_text = value+'人民欢迎您';
+        //this._ID_CityName_text = value+'人民欢迎您';
+        this._ID_CityName_text = value;
         this.ID_CityName.text = this._ID_CityName_text;
         //console.log(this._ID_CityName_text);
     }
